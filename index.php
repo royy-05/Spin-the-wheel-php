@@ -207,6 +207,7 @@ if ($result) {
       background: #1a1a2e;
       overflow: hidden;
       transform: rotate(<?php echo $rotation; ?>deg);
+      will-change: transform;
     }
 
     .wheel-inner {
@@ -226,7 +227,7 @@ if ($result) {
       display: flex;
       align-items: center;
       justify-content: center;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
       overflow: hidden;
       transition: filter 0.3s ease;
     }
@@ -236,27 +237,27 @@ if ($result) {
     }
 
     .segment:nth-child(1) { 
-      transform: rotate(-60deg) skewY(-30deg); 
+      transform: rotate(0deg) skewY(-30deg); 
       background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%);
     }
     .segment:nth-child(2) { 
-      transform: rotate(0deg) skewY(-30deg); 
+      transform: rotate(60deg) skewY(-30deg); 
       background: linear-gradient(135deg, #F38181 0%, #E57373 100%);
     }
     .segment:nth-child(3) { 
-      transform: rotate(60deg) skewY(-30deg); 
+      transform: rotate(120deg) skewY(-30deg); 
       background: linear-gradient(135deg, #4ECDC4 0%, #26B5AC 100%);
     }
     .segment:nth-child(4) { 
-      transform: rotate(120deg) skewY(-30deg); 
+      transform: rotate(180deg) skewY(-30deg); 
       background: linear-gradient(135deg, #FFE66D 0%, #FFD93D 100%);
     }
     .segment:nth-child(5) { 
-      transform: rotate(180deg) skewY(-30deg); 
+      transform: rotate(240deg) skewY(-30deg); 
       background: linear-gradient(135deg, #DDA0DD 0%, #D391D3 100%);
     }
     .segment:nth-child(6) { 
-      transform: rotate(240deg) skewY(-30deg); 
+      transform: rotate(300deg) skewY(-30deg); 
       background: linear-gradient(135deg, #95E1D3 0%, #7DD3C0 100%);
     }
 
@@ -273,33 +274,33 @@ if ($result) {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 120px;
+      width: 140px;
       height: 35px;
-      transform-origin: 0 50%;
+      transform-origin: 0 0;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding-right: 20px;
+      justify-content: flex-start;
+      padding-left: 80px;
     }
 
     .label span {
-      color: #1a1a2e;
+      color: #fff;
       font-weight: 800;
-      font-size: 13px;
-      transform: rotate(0deg);
+      font-size: 12px;
+      transform: rotate(30deg);
       text-shadow: 
-        1px 1px 3px rgba(255,255,255,0.5),
-        -1px -1px 3px rgba(255,255,255,0.3);
+        2px 2px 4px rgba(0,0,0,0.8),
+        -1px -1px 2px rgba(0,0,0,0.5);
       white-space: nowrap;
       letter-spacing: 0.5px;
     }
 
-    .label:nth-child(1) { transform: rotate(-60deg) translateX(60px); }
-    .label:nth-child(2) { transform: rotate(0deg) translateX(60px); }
-    .label:nth-child(3) { transform: rotate(60deg) translateX(60px); }
-    .label:nth-child(4) { transform: rotate(120deg) translateX(60px); }
-    .label:nth-child(5) { transform: rotate(180deg) translateX(60px); }
-    .label:nth-child(6) { transform: rotate(240deg) translateX(60px); }
+    .label:nth-child(1) { transform: rotate(0deg); }
+    .label:nth-child(2) { transform: rotate(60deg); }
+    .label:nth-child(3) { transform: rotate(120deg); }
+    .label:nth-child(4) { transform: rotate(180deg); }
+    .label:nth-child(5) { transform: rotate(240deg); }
+    .label:nth-child(6) { transform: rotate(300deg); }
 
     .center-circle {
       position: absolute;
@@ -310,7 +311,7 @@ if ($result) {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 5;
+      z-index: 10;
       box-shadow: 
         0 6px 20px rgba(0,0,0,0.4),
         inset 0 -3px 10px rgba(0,0,0,0.2),
@@ -320,6 +321,7 @@ if ($result) {
       justify-content: center;
       font-size: 28px;
       border: 4px solid rgba(255, 215, 0, 0.5);
+      pointer-events: none;
     }
 
     .spin-btn {
@@ -342,6 +344,7 @@ if ($result) {
       position: relative;
       overflow: hidden;
       z-index: 1;
+      user-select: none;
     }
 
     .spin-btn::before {
@@ -372,6 +375,12 @@ if ($result) {
 
     .spin-btn:active {
       transform: translateY(-2px) scale(1.02);
+    }
+
+    .spin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
     }
 
     .popup-overlay {
@@ -580,7 +589,7 @@ if ($result) {
       height: 12px;
       top: -20px;
       animation: fall 4s linear forwards;
-      z-index: 1000;
+      z-index: 99;
     }
 
     @keyframes fall {
@@ -590,7 +599,6 @@ if ($result) {
       }
     }
 
-    /* Confetti colors */
     <?php if ($showPopup && $result && $result['code']): ?>
       <?php 
       $colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#DDA0DD', '#F38181', '#FFD700', '#FF69B4', '#87CEEB'];
@@ -614,7 +622,6 @@ if ($result) {
       <?php endfor; ?>
     <?php endif; ?>
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
         font-size: 2rem;
@@ -638,20 +645,13 @@ if ($result) {
       }
 
       .label {
-        width: 90px;
-        padding-right: 15px;
+        width: 110px;
+        padding-left: 60px;
       }
 
       .label span {
         font-size: 10px;
       }
-
-      .label:nth-child(1) { transform: rotate(-60deg) translateX(45px); }
-      .label:nth-child(2) { transform: rotate(0deg) translateX(45px); }
-      .label:nth-child(3) { transform: rotate(60deg) translateX(45px); }
-      .label:nth-child(4) { transform: rotate(120deg) translateX(45px); }
-      .label:nth-child(5) { transform: rotate(180deg) translateX(45px); }
-      .label:nth-child(6) { transform: rotate(240deg) translateX(45px); }
 
       .center-circle {
         width: 55px;
@@ -730,21 +730,14 @@ if ($result) {
       }
 
       .label {
-        width: 75px;
-        padding-right: 12px;
+        width: 90px;
+        padding-left: 50px;
       }
 
       .label span {
         font-size: 8.5px;
         letter-spacing: 0.3px;
       }
-
-      .label:nth-child(1) { transform: rotate(-60deg) translateX(38px); }
-      .label:nth-child(2) { transform: rotate(0deg) translateX(38px); }
-      .label:nth-child(3) { transform: rotate(60deg) translateX(38px); }
-      .label:nth-child(4) { transform: rotate(120deg) translateX(38px); }
-      .label:nth-child(5) { transform: rotate(180deg) translateX(38px); }
-      .label:nth-child(6) { transform: rotate(240deg) translateX(38px); }
 
       .center-circle {
         width: 50px;
@@ -875,7 +868,6 @@ if ($result) {
     </div>
   </div>
   
-  <!-- Confetti -->
   <?php if ($result['code']): ?>
     <?php for ($i = 0; $i < 80; $i++): ?>
     <div class="confetti confetti-<?php echo $i; ?>"></div>
