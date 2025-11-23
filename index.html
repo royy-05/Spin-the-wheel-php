@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin the Wheel - Win Big!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="styles.css">
+  </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SPIN THE WHEEL</h1>
+            <p>Try Your Luck and Win Amazing Prizes!</p>
+        </div>
+
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <div class="wheel-wrapper">
+                <div class="wheel-outer-ring"></div>
+                <div class="wheel" id="wheel">
+                    <div class="wheel-segment">
+                        <div class="segment-content">
+                            <strong>Better Luck Next</strong>
+                        </div>
+                    </div>
+                    <div class="wheel-segment">
+                        <div class="segment-content">
+                            <strong>50% OFF</strong>
+                        </div>
+                    </div>
+                    <div class="wheel-segment">
+                        <div class="segment-content">
+                            <strong>Better Luck Next</strong>
+                        </div>
+                    </div>
+                    <div class="wheel-segment">
+                        <div class="segment-content">
+                            <strong>100% OFF</strong>
+                        </div>
+                    </div>
+                    <div class="wheel-segment">
+                        <div class="segment-content">
+                            <strong>Better Luck Next</strong>
+                        </div>
+                    </div>
+                    <div class="wheel-segment">
+                        <div class="segment-content">
+                            <strong>50% OFF</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="wheel-center">⭐</div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="spin-button" id="spinButton" onclick="spinWheel()">
+                🎯 SPIN NOW
+            </button>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="result-modal" id="resultModal">
+        <div class="result-content">
+            <div class="result-icon" id="resultIcon">🎉</div>
+            <div class="result-title" id="resultTitle">Congratulations!</div>
+            <div class="result-message" id="resultMessage">You won 50% OFF!</div>
+            <button class="close-button" onclick="closeModal()">Spin Again</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
